@@ -3,22 +3,97 @@
 @theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-text: var(--color-foreground);
+  --color-background: var(--geist-background);
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
+  --color-muted: var(--color-muted);
+  --color-border: var(--color-border);
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-background: #ffffff;
+  --color-foreground: #171717;
+  --color-text: var(--color-foreground);
+  --color-primary: #1e40af;
+  --color-secondary: #9333ea;
+  --color-accent: #f59e0b;
+  --color-muted: #6b7280;
+  --color-border: #d1d5db;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --color-background: #0a0a0a;
+  --color-foreground: #ededed;
+  --color-text: var(--color-foreground);
+  --color-primary: #3b82f6; /* Lighter Blue */
+  --color-secondary: #a855f7; /* Soft Purple */
+  --color-accent: #fbbf24; /* Gold */
+  --color-muted: #9ca3af; /* Light Gray */
+  --color-border: #374151; /* Dark Gray */
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: var(--color-text);
+  background: var(--color-background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Dark mode utility classes */
+.bg-background {
+  background-color: var(--color-background);
+}
+
+.text-text {
+  color: var(--color-text);
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.text-muted {
+  color: var(--color-muted);
+}
+
+.border {
+  border-color: var(--color-border);
+}
+
+/* Dark mode variants */
+.dark .bg-background {
+  background-color: var(--color-background);
+}
+
+.dark .text-text {
+  color: var(--color-text);
+}
+
+.dark .text-primary {
+  color: var(--color-primary);
+}
+
+.dark .text-secondary {
+  color: var(--color-secondary);
+}
+
+.dark .text-accent {
+  color: var(--color-accent);
+}
+
+.dark .text-muted {
+  color: var(--color-muted);
+}
+
+.dark .border {
+  border-color: var(--color-border);
 }
