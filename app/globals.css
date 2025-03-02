@@ -10,12 +10,14 @@
   --color-accent: var(--color-accent);
   --color-muted: var(--color-muted);
   --color-border: var(--color-border);
+  --color-button: var(--color-button);
 }
 
 :root {
   --color-background: #ffffff;
   --color-foreground: #171717;
   --color-text: var(--color-foreground);
+  --color-button: #171717;
   --color-primary: #1e40af;
   --color-secondary: #9333ea;
   --color-accent: #f59e0b;
@@ -27,11 +29,12 @@
   --color-background: #0a0a0a;
   --color-foreground: #ededed;
   --color-text: var(--color-foreground);
-  --color-primary: #3b82f6; /* Lighter Blue */
-  --color-secondary: #a855f7; /* Soft Purple */
-  --color-accent: #fbbf24; /* Gold */
-  --color-muted: #9ca3af; /* Light Gray */
-  --color-border: #374151; /* Dark Gray */
+  --color-button: #1d1f22;
+  --color-primary: #3b82f6;
+  --color-secondary: #a855f7;
+  --color-accent: #fbbf24;
+  --color-muted: #9ca3af;
+  --color-border: #374151;
 }
 
 body {
@@ -40,7 +43,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Dark mode utility classes */
 .bg-background {
   background-color: var(--color-background);
 }
@@ -69,7 +71,10 @@ body {
   border-color: var(--color-border);
 }
 
-/* Dark mode variants */
+.bg-button {
+  background-color: var(--color-button);
+}
+
 .dark .bg-background {
   background-color: var(--color-background);
 }
@@ -96,4 +101,53 @@ body {
 
 .dark .border {
   border-color: var(--color-border);
+}
+
+.dark .bg-button {
+  background-color: var(--color-button);
+}
+
+/* Shine Animation */
+@keyframes shine {
+  0% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: -100%;
+  }
+}
+
+.animate-shine {
+  animation: shine 5s linear infinite;
+}
+
+/* Star Movement Animations */
+@keyframes star-movement-bottom {
+  0% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-100%, 0%);
+    opacity: 0;
+  }
+}
+
+@keyframes star-movement-top {
+  0% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(100%, 0%);
+    opacity: 0;
+  }
+}
+
+.animate-star-movement-bottom {
+  animation: star-movement-bottom linear infinite alternate;
+}
+
+.animate-star-movement-top {
+  animation: star-movement-top linear infinite alternate;
 }
