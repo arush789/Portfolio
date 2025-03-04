@@ -1,10 +1,10 @@
 "use client";
-import AnimatedContent from "@/components/AnimatedContent";
-import Aurora from "@/components/Aurora";
-import FadeContent from "@/components/FadeContent";
-import Footer from "@/components/Footer";
-import MyProjects from "@/components/MyProjects";
-import SplitText from "@/components/SplitText";
+import AnimatedContent from "@/components/Animations/AnimatedContent";
+import Aurora from "@/components/Animations/Aurora";
+import FadeContent from "@/components/Animations/FadeContent";
+import WhatIdo from "@/components/Home/WhatIdo";
+import MyProjects from "../components/Home/MyProjects";
+import SplitText from "@/components/Animations/SplitText";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import Image from "next/image";
@@ -18,6 +18,8 @@ import {
   SiPostgresql,
 } from "react-icons/si";
 import profilePhoto from "../images/WhatsApp Image 2025-03-01 at 8.00.18 PM.jpeg";
+import ShinyText from "@/components/Animations/ShinyText";
+import Link from "next/link";
 
 const skills = [
   { icon: <FaReact className="text-blue-500" />, name: "React" },
@@ -32,6 +34,14 @@ const skills = [
 export default function Home() {
   const { resolvedTheme } = useTheme();
   const [currentTheme, setCurrentTheme] = useState(resolvedTheme);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 640);
+    handleResize(); // Set initial state
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     setCurrentTheme(resolvedTheme);
@@ -123,15 +133,17 @@ export default function Home() {
         <Marquee
           autoFill={true}
           speed={50}
-          gradient={true}
+          gradient={!isMobile} // Disable gradient on mobile
           gradientWidth={300}
-          gradientColor={resolvedTheme == "dark" ? "#0a0a0a" : "white"}
-          className="flex items-center border-t border-b border-gray-700 py-4"
+          gradientColor={resolvedTheme === "dark" ? "#0a0a0a" : "white"}
+          className="flex items-center border-t border-b border-gray-700 
+          py-2 sm:py-4" // Reduce padding for mobile
         >
           {skills.map((skill, index) => (
             <div
               key={index}
-              className="flex gap-2 items-center mx-3 text-xl border px-6 py-5 rounded-full border-gray-600"
+              className="flex gap-1 sm:gap-2 items-center mx-2 sm:mx-3 text-sm sm:text-xl border 
+              px-4 sm:px-6 py-2 sm:py-5 rounded-full border-gray-600" // Smaller text & padding for mobile
             >
               {skill.icon}
               <span className="text-text">{skill.name}</span>
@@ -152,64 +164,29 @@ export default function Home() {
         scale={1.05}
         threshold={0.15}
       >
-        <div className="flex flex-col items-center mt-20">
-          <h2 className="text-4xl font-bold text-center mb-12 text-text">
-            What I Do
-          </h2>
+        <WhatIdo />
+      </AnimatedContent>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
-            {[
-              {
-                title: "Web Development",
-                description:
-                  "Building fast, scalable, and responsive web applications using React, Next.js, and Node.js.",
-                icon: <FaReact className="service-icon text-primary" />,
-              },
-              {
-                title: "Mobile App Development",
-                description:
-                  "Creating smooth and user-friendly mobile apps with React Native for iOS and Android.",
-                icon: <FaReact className="service-icon text-secondary" />,
-              },
-              {
-                title: "Backend Development",
-                description:
-                  "Developing secure and efficient APIs using Node.js, Express.js, and databases like MongoDB & PostgreSQL.",
-                icon: <FaNodeJs className="service-icon text-accent" />,
-              },
-              {
-                title: "Database Management",
-                description:
-                  "Managing data efficiently using SQL & NoSQL databases such as PostgreSQL and MongoDB.",
-                icon: <SiPostgresql className="service-icon text-muted" />,
-              },
-              {
-                title: "Full-Stack Solutions",
-                description:
-                  "Providing end-to-end solutions, handling both frontend and backend seamlessly.",
-                icon: <SiNextdotjs className="service-icon text-primary" />,
-              },
-              {
-                title: "Performance Optimization",
-                description:
-                  "Optimizing applications for better speed, performance, and user experience.",
-                icon: <SiExpress className="service-icon text-secondary" />,
-              },
-            ].map((service, index) => (
-              <div
-                key={index}
-                className="border-2 border-gray-700 p-5 lg:mx-0 mx-5 rounded-2xl "
-              >
-                <div className="mb-4 text-5xl">{service.icon}</div>
-                <h3 className="text-2xl font-semibold text-text">
-                  {service.title}
-                </h3>
-                <p className="text-muted mt-2">{service.description}</p>
-              </div>
-            ))}
+      <section className="mt-32 text-center px-6">
+        <h2 className="text-4xl font-bold mb-4 text-text">Let’s Connect</h2>
+        <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+          I’m always open to new opportunities, collaborations, or just a
+          friendly chat. Whether you have a project idea or just want to say hi,
+          feel free to reach out!
+        </p>
+
+        <div className="flex justify-center mt-6">
+          <div className="relative z-10 flex items-center space-x-2">
+            <Link
+              href="/contact"
+              className="bg-button px-4 py-2 rounded-full"
+              scroll={false}
+            >
+              <p>Contact me</p>
+            </Link>
           </div>
         </div>
-      </AnimatedContent>
+      </section>
     </div>
   );
 }

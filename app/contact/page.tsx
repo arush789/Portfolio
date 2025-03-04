@@ -1,5 +1,5 @@
 "use client";
-import FadeContent from "@/components/FadeContent";
+import FadeContent from "@/components/Animations/FadeContent";
 import { useState } from "react";
 import { FaGithub } from "react-icons/fa";
 

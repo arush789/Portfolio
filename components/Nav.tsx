@@ -53,7 +53,7 @@ const Nav = () => {
                   Home
                 </Link>
               </li>
-              <li className="hover:font-bold">
+              {/* <li className="hover:font-bold">
                 <Link href="/about" className="text-text ">
                   About
                 </Link>
@@ -62,7 +62,7 @@ const Nav = () => {
                 <Link href="/projects" className="text-text ">
                   Projects
                 </Link>
-              </li>
+              </li> */}
               <li className="hover:font-bold">
                 <Link href="/contact" className="text-text ">
                   Contact
@@ -180,7 +180,7 @@ const Nav = () => {
                     Home
                   </Link>
                 </li>
-                <li className="hover:font-bold">
+                {/* <li className="hover:font-bold">
                   <Link href="/about" className="text-black dark:text-white">
                     About
                   </Link>
@@ -189,7 +189,7 @@ const Nav = () => {
                   <Link href="/projects" className="text-black dark:text-white">
                     Projects
                   </Link>
-                </li>
+                </li> */}
                 <li className="hover:font-bold">
                   <Link href="/contact" className="text-black dark:text-white">
                     Contact

@@ -77,23 +77,13 @@ body {
   border-color: var(--color-border);
 }
 
-/* Updated Button Styles */
 .bg-button {
   background-color: var(--color-button);
   color: #ffffff;
-  transition: background 0.3s;
-}
-
-.bg-button:hover {
-  background-color: #172554; /* Darker shade on hover */
 }
 
 .dark .bg-button {
   background-color: var(--color-button);
-}
-
-.dark .bg-button:hover {
-  background-color: #1e3a8a; /* Darker shade on hover */
 }
 
 /* Input and Form Styles */

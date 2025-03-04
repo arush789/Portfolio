@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -19,23 +19,35 @@ const Footer = () => {
             <a href="#" className="text-gray-300 hover:text-white transition">
               Home
             </a>
-            <a href="#" className="text-gray-300 hover:text-white transition">
+            {/* <a href="#" className="text-gray-300 hover:text-white transition">
               Projects
-            </a>
-            <a href="#" className="text-gray-300 hover:text-white transition">
+            </a> */}
+            <a
+              href="/contact"
+              className="text-gray-300 hover:text-white transition"
+            >
               Contact
             </a>
           </div>
 
           {/* Social Links */}
           <div className="mt-6 lg:mt-0 lg:w-1/3 flex space-x-6">
-            <a href="#" className="text-gray-300 hover:text-white transition">
+            <a
+              href="https://github.com/arush789"
+              className="text-gray-300 hover:text-white transition"
+            >
               <FaGithub size={24} />
             </a>
-            <a href="#" className="text-gray-300 hover:text-white transition">
-              <FaLinkedin size={24} />
+            <a
+              href="https://www.instagram.com/arushkewalramani"
+              className="text-gray-300 hover:text-white transition"
+            >
+              <FaInstagram size={24} />
             </a>
-            <a href="#" className="text-gray-300 hover:text-white transition">
+            <a
+              href="https://x.com/EvilZeus69"
+              className="text-gray-300 hover:text-white transition"
+            >
               <FaTwitter size={24} />
             </a>
           </div>
