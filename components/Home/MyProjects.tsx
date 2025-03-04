@@ -1,12 +1,12 @@
 "use client";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import Link from "next/link";
 import bodzImage from "../../images/bodz.jpg";
 import movieconImage from "../../images/movie-con.jpg";
 import recitoreImage from "../../images/recitore.jpg";
 import AnimatedContent from "../Animations/AnimatedContent";
 import SpotlightCard from "../Animations/SpotlightCard";
-import Link from "next/link";
 
 const projects = [
   {

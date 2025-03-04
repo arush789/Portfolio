@@ -1,10 +1,5 @@
-import { useRef, useEffect, useState, ReactNode } from "react";
-import {
-  useSpring,
-  animated,
-  SpringConfig,
-  AnimatedProps,
-} from "@react-spring/web";
+import { animated, SpringConfig, useSpring } from "@react-spring/web";
+import { ReactNode, useEffect, useRef, useState } from "react";
 
 interface AnimatedContentProps {
   children: ReactNode;
