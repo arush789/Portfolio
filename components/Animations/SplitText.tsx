@@ -3,6 +3,7 @@ import {
   animated,
   SpringConfig,
   SpringValue,
+  AnimatedProps,
 } from "@react-spring/web";
 import { useEffect, useRef, useState } from "react";
 
@@ -97,9 +98,7 @@ const SplitText: React.FC<SplitTextProps> = ({
             return (
               <animated.span
                 key={index}
-                style={
-                  springs[index] as Record<string, SpringValue<number | string>>
-                }
+                style={springs[index] as AnimatedProps<{ style: any }>["style"]}
                 className="inline-block transform transition-opacity will-change-transform"
               >
                 {letter}

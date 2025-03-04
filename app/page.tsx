@@ -91,8 +91,6 @@ export default function Home() {
               <SplitText
                 text="A Full-Stack Developer specializing in React, Node.js, and React Native. I build modern, scalable, and high-performance web and mobile applications. Let’s create something amazing together!"
                 delay={5.0}
-                animateBy="words"
-                direction="top"
                 className="lg:text-[30px] text-[20px]"
               />
               <motion.div

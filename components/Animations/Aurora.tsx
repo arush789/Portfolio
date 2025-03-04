@@ -152,6 +152,7 @@ export default function Aurora(props: AuroraProps) {
     ctn.appendChild(gl.canvas);
 
     function resize() {
+      if (!ctn) return;
       const width = ctn.offsetWidth;
       const height = 600;
       renderer.setSize(width, height);

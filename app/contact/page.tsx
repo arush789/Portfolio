@@ -79,7 +79,7 @@ const ContactPage = () => {
                 value={formData.message}
                 onChange={handleChange}
                 className="w-full p-3 border border-border rounded-lg focus:outline-none focus:ring-4 focus:ring-primary bg-background text-text"
-                rows="4"
+                rows={4}
                 required
               ></textarea>
             </div>
