@@ -34,7 +34,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class">
           <Nav />
           {children}
-          {/* <Footer /> */}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

@@ -40,7 +40,7 @@ export default function Home() {
   const auroraColors = ["#1E3A8A", "#9333EA", "#6D28D9"];
 
   return (
-    <div className="absolute w-full">
+    <div>
       <div className="absolute w-full">
         <AnimatedContent
           distance={150}
