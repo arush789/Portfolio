@@ -1,5 +1,10 @@
 import { useRef, useEffect, useState, ReactNode } from "react";
-import { useSpring, animated, SpringConfig } from "@react-spring/web";
+import {
+  useSpring,
+  animated,
+  SpringConfig,
+  AnimatedProps,
+} from "@react-spring/web";
 
 interface AnimatedContentProps {
   children: ReactNode;
@@ -27,7 +32,7 @@ const AnimatedContent: React.FC<AnimatedContentProps> = ({
   delay = 0,
 }) => {
   const [inView, setInView] = useState(false);
-  const ref = useRef<HTMLDivElement | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const element = ref.current;
@@ -50,10 +55,10 @@ const AnimatedContent: React.FC<AnimatedContentProps> = ({
     return () => observer.disconnect();
   }, [threshold, delay]);
 
-  const directions: Record<"vertical" | "horizontal", string> = {
+  const directions = {
     vertical: "Y",
     horizontal: "X",
-  };
+  } as const;
 
   const springProps = useSpring({
     from: {
@@ -72,7 +77,7 @@ const AnimatedContent: React.FC<AnimatedContentProps> = ({
   });
 
   return (
-    <animated.div ref={ref} style={springProps}>
+    <animated.div ref={ref} style={springProps} {...({ children } as any)}>
       {children}
     </animated.div>
   );

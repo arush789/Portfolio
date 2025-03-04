@@ -2,7 +2,6 @@
 import AnimatedContent from "@/components/Animations/AnimatedContent";
 import Aurora from "@/components/Animations/Aurora";
 import FadeContent from "@/components/Animations/FadeContent";
-import SplitText from "@/components/Animations/SplitText";
 import WhatIdo from "@/components/Home/WhatIdo";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
@@ -88,11 +87,16 @@ export default function Home() {
               <h1 className="lg:text-5xl text-2xl font-bold mb-4">
                 Hi, I’m Arush.
               </h1>
-              <SplitText
+              {/* <SplitText
                 text="A Full-Stack Developer specializing in React, Node.js, and React Native. I build modern, scalable, and high-performance web and mobile applications. Let’s create something amazing together!"
                 delay={5.0}
                 className="lg:text-[30px] text-[20px]"
-              />
+              /> */}
+              <p className="text-3xl leading-12">
+                A Full-Stack Developer specializing in React, Node.js, and React
+                Native. I build modern, scalable, and high-performance web and
+                mobile applications. Let’s create something amazing together!
+              </p>
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
