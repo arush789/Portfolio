@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, Montserrat } from "next/font/google";
-import "./globals.css";
-import Nav from "@/components/Nav";
-import { ThemeProvider } from "next-themes";
 import Footer from "@/components/Footer";
+import Nav from "@/components/Nav";
+import type { Metadata } from "next";
+import { ThemeProvider } from "next-themes";
+import { Montserrat } from "next/font/google";
+import "./globals.css";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
