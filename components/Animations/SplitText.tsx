@@ -1,9 +1,8 @@
 import {
-  useSprings,
   animated,
-  SpringConfig,
-  SpringValue,
   AnimatedProps,
+  SpringConfig,
+  useSprings,
 } from "@react-spring/web";
 import { useEffect, useRef, useState } from "react";
 
