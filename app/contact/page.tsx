@@ -10,11 +10,13 @@ const ContactPage = () => {
     message: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=arushkewalramani45@gmail.com&su=Contact Form Submission&body=Name: ${encodeURIComponent(
       formData.name
