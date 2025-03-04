@@ -2,12 +2,12 @@
 import AnimatedContent from "@/components/Animations/AnimatedContent";
 import Aurora from "@/components/Animations/Aurora";
 import FadeContent from "@/components/Animations/FadeContent";
-import WhatIdo from "@/components/Home/WhatIdo";
-import MyProjects from "../components/Home/MyProjects";
 import SplitText from "@/components/Animations/SplitText";
+import WhatIdo from "@/components/Home/WhatIdo";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
 import { FaNodeJs, FaReact } from "react-icons/fa";
@@ -17,9 +17,8 @@ import {
   SiNextdotjs,
   SiPostgresql,
 } from "react-icons/si";
+import MyProjects from "../components/Home/MyProjects";
 import profilePhoto from "../images/WhatsApp Image 2025-03-01 at 8.00.18 PM.jpeg";
-import ShinyText from "@/components/Animations/ShinyText";
-import Link from "next/link";
 
 const skills = [
   { icon: <FaReact className="text-blue-500" />, name: "React" },
@@ -33,7 +32,7 @@ const skills = [
 
 export default function Home() {
   const { resolvedTheme } = useTheme();
-  const [currentTheme, setCurrentTheme] = useState(resolvedTheme);
+
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -42,10 +41,6 @@ export default function Home() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  useEffect(() => {
-    setCurrentTheme(resolvedTheme);
-  }, [resolvedTheme]);
 
   const auroraColors = ["#1E3A8A", "#9333EA", "#6D28D9"];
 
