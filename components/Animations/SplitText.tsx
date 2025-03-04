@@ -98,7 +98,7 @@ const SplitText: React.FC<SplitTextProps> = ({
               <animated.span
                 key={index}
                 style={
-                  springs[index] as unknown as Record<string, SpringValue<any>>
+                  springs[index] as Record<string, SpringValue<number | string>>
                 }
                 className="inline-block transform transition-opacity will-change-transform"
               >
