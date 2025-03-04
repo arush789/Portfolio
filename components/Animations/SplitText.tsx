@@ -1,4 +1,9 @@
-import { useSprings, animated, SpringConfig } from "@react-spring/web";
+import {
+  useSprings,
+  animated,
+  SpringConfig,
+  SpringValue,
+} from "@react-spring/web";
 import { useEffect, useRef, useState } from "react";
 
 interface SplitTextProps {
@@ -57,7 +62,7 @@ const SplitText: React.FC<SplitTextProps> = ({
     letters.map((_, i) => ({
       from: animationFrom,
       to: inView
-        ? async (next: (props: any) => Promise<void>) => {
+        ? async (next: (props: typeof animationTo) => Promise<void>) => {
             await next(animationTo);
             animatedCount.current += 1;
             if (
@@ -92,7 +97,9 @@ const SplitText: React.FC<SplitTextProps> = ({
             return (
               <animated.span
                 key={index}
-                style={springs[index] as unknown as React.CSSProperties}
+                style={
+                  springs[index] as unknown as Record<string, SpringValue<any>>
+                }
                 className="inline-block transform transition-opacity will-change-transform"
               >
                 {letter}
