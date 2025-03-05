@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
@@ -16,40 +17,43 @@ const Footer = () => {
 
           <div className="mt-6 lg:mt-0 lg:w-1/3 flex flex-col space-y-3">
             <h3 className="text-xl font-semibold">Quick Links</h3>
-            <a href="/" className="text-gray-300 hover:text-white transition">
+            <Link
+              href="/"
+              className="text-gray-300 hover:text-white transition"
+            >
               Home
-            </a>
-            {/* <a href="#" className="text-gray-300 hover:text-white transition">
+            </Link>
+            {/* <Link href="#" className="text-gray-300 hover:text-white transition">
               Projects
-            </a> */}
-            <a
+            </Link> */}
+            <Link
               href="/contact"
               className="text-gray-300 hover:text-white transition"
             >
               Contact
-            </a>
+            </Link>
           </div>
 
           {/* Social Links */}
           <div className="mt-6 lg:mt-0 lg:w-1/3 flex space-x-6">
-            <a
+            <Link
               href="https://github.com/arush789"
               className="text-gray-300 hover:text-white transition"
             >
               <FaGithub size={24} />
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://www.instagram.com/arushkewalramani"
               className="text-gray-300 hover:text-white transition"
             >
               <FaInstagram size={24} />
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://x.com/EvilZeus69"
               className="text-gray-300 hover:text-white transition"
             >
               <FaTwitter size={24} />
-            </a>
+            </Link>
           </div>
         </div>
 
