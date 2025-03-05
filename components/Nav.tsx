@@ -176,7 +176,11 @@ const Nav = () => {
             >
               <ul className="flex flex-col gap-4">
                 <li className="hover:font-bold">
-                  <Link href="/" className="text-black dark:text-white">
+                  <Link
+                    href="/"
+                    onClick={() => setMenu(false)}
+                    className="text-black dark:text-white"
+                  >
                     Home
                   </Link>
                 </li>
@@ -191,7 +195,11 @@ const Nav = () => {
                   </Link>
                 </li> */}
                 <li className="hover:font-bold">
-                  <Link href="/contact" className="text-black dark:text-white">
+                  <Link
+                    href="/contact"
+                    onClick={() => setMenu(false)}
+                    className="text-black dark:text-white"
+                  >
                     Contact
                   </Link>
                 </li>

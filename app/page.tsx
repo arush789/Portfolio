@@ -67,7 +67,7 @@ export default function Home() {
         </AnimatedContent>
       </div>
 
-      <div className="container mx-auto px-6 py-10 ">
+      <div className="container mx-auto px-6 py-2 lg:py-10 ">
         {/* Hero Section */}
         <FadeContent
           blur={true}
@@ -75,7 +75,7 @@ export default function Home() {
           easing="ease-out"
           initialOpacity={0}
         >
-          <div className="flex lg:flex-row flex-col my-32 justify-center items-center gap-10 relative z-10">
+          <div className="flex lg:flex-row flex-col my-24 lg:my-32 justify-center items-center gap-10 relative z-10">
             <Image
               className="rounded-full w-52 lg:w-72"
               width={300}
@@ -84,7 +84,7 @@ export default function Home() {
               src={profilePhoto}
             />
             <div className="lg:w-1/2 text-center lg:text-left px-5">
-              <h1 className="lg:text-5xl text-2xl font-bold mb-4">
+              <h1 className="lg:text-5xl text-3xl font-bold mb-4">
                 Hi, I’m Arush.
               </h1>
               {/* <SplitText
@@ -92,7 +92,7 @@ export default function Home() {
                 delay={5.0}
                 className="lg:text-[30px] text-[20px]"
               /> */}
-              <p className="text-3xl leading-12">
+              <p className="text-lg lg:text-3xl leading-8 lg:leading-12">
                 A Full-Stack Developer specializing in React, Node.js, and React
                 Native. I build modern, scalable, and high-performance web and
                 mobile applications. Let’s create something amazing together!
@@ -130,17 +130,17 @@ export default function Home() {
         <Marquee
           autoFill={true}
           speed={50}
-          gradient={!isMobile} // Disable gradient on mobile
+          gradient={!isMobile}
           gradientWidth={300}
           gradientColor={resolvedTheme === "dark" ? "#0a0a0a" : "white"}
           className="flex items-center border-t border-b border-gray-700 
-          py-2 sm:py-4" // Reduce padding for mobile
+          py-4"
         >
           {skills.map((skill, index) => (
             <div
               key={index}
-              className="flex gap-1 sm:gap-2 items-center mx-2 sm:mx-3 text-sm sm:text-xl border 
-              px-4 sm:px-6 py-2 sm:py-5 rounded-full border-gray-600" // Smaller text & padding for mobile
+              className="flex gap-1 sm:gap-2 items-center mx-2 sm:mx-3 text-lg sm:text-xl border 
+              px-4 sm:px-6 py-2 sm:py-5 rounded-full border-gray-600"
             >
               {skill.icon}
               <span className="text-text">{skill.name}</span>
@@ -148,7 +148,7 @@ export default function Home() {
           ))}
         </Marquee>
       </AnimatedContent>
-      <div className="flex justify-center items-center mt-20">
+      <div className="flex justify-center items-center mt-8 lg:mt-20">
         <MyProjects />
       </div>
       <AnimatedContent
