@@ -2,12 +2,24 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
-import { FaNodeJs, FaReact } from "react-icons/fa";
 import {
+  FaCss3Alt,
+  FaGitAlt,
+  FaHtml5,
+  FaNodeJs,
+  FaPython,
+  FaReact,
+} from "react-icons/fa";
+import {
+  SiDocker,
   SiExpress,
+  SiFirebase,
+  SiJavascript,
   SiMongodb,
   SiNextdotjs,
   SiPostgresql,
+  SiTailwindcss,
+  SiTypescript,
 } from "react-icons/si";
 
 const MarqueeContent = () => {
@@ -21,15 +33,25 @@ const MarqueeContent = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
   const skills = [
     { icon: <FaReact className="text-blue-500" />, name: "React" },
     { icon: <FaNodeJs className="text-green-600" />, name: "Node.js" },
     { icon: <FaReact className="text-cyan-500" />, name: "React Native" },
-    { icon: <SiNextdotjs className="text-gray-800" />, name: "Next.js" },
+    {
+      icon: <SiNextdotjs className="text-gray-800 dark:text-white" />,
+      name: "Next.js",
+    },
     { icon: <SiExpress className="text-gray-500" />, name: "Express.js" },
     { icon: <SiPostgresql className="text-blue-600" />, name: "PostgreSQL" },
     { icon: <SiMongodb className="text-green-500" />, name: "MongoDB" },
+    { icon: <SiJavascript className="text-yellow-400" />, name: "JavaScript" },
+    { icon: <SiTypescript className="text-blue-500" />, name: "TypeScript" },
+    { icon: <FaPython className="text-yellow-500" />, name: "Python" },
+    { icon: <SiTailwindcss className="text-sky-400" />, name: "Tailwind CSS" },
+    { icon: <FaGitAlt className="text-orange-500" />, name: "Git" },
+    { icon: <SiFirebase className="text-yellow-500" />, name: "Firebase" },
+    { icon: <FaHtml5 className="text-orange-600" />, name: "HTML5" },
+    { icon: <FaCss3Alt className="text-blue-600" />, name: "CSS3" },
   ];
 
   return (

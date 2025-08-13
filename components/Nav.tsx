@@ -57,12 +57,12 @@ const Nav = () => {
                 <Link href="/about" className="text-text ">
                   About
                 </Link>
-              </li>
+              </li> */}
               <li className="hover:font-bold">
                 <Link href="/projects" className="text-text ">
                   Projects
                 </Link>
-              </li> */}
+              </li>
               <li className="hover:font-bold">
                 <Link href="/contact" className="text-text ">
                   Contact
@@ -188,12 +188,12 @@ const Nav = () => {
                   <Link href="/about" className="text-black dark:text-white">
                     About
                   </Link>
-                </li>
+                </li> */}
                 <li className="hover:font-bold">
                   <Link href="/projects" className="text-black dark:text-white">
                     Projects
                   </Link>
-                </li> */}
+                </li>
                 <li className="hover:font-bold">
                   <Link
                     href="/contact"
