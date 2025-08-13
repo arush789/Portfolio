@@ -11,7 +11,6 @@ import {
   FaReact,
 } from "react-icons/fa";
 import {
-  SiDocker,
   SiExpress,
   SiFirebase,
   SiJavascript,
