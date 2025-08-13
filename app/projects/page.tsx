@@ -1,18 +1,15 @@
 "use client";
-import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
+import AnimatedContent from "../../components/Animations/AnimatedContent";
 import bodzImage from "../../images/bodz.jpg";
-import movieconImage from "../../images/movie-con.jpg";
-import recitoreImage from "../../images/recitore.jpg";
 import calculatorImage from "../../images/Calculator.png";
 import guessTheWordImage from "../../images/Guess The Word.png";
 import matchTheCardImage from "../../images/Matching Card.png";
-import AnimatedContent from "../../components/Animations/AnimatedContent";
+import movieconImage from "../../images/movie-con.jpg";
+import recitoreImage from "../../images/recitore.jpg";
 
 const Projectpage = () => {
-  const { theme } = useTheme();
-
   const projects = [
     {
       id: 1,
