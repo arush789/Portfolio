@@ -10,8 +10,10 @@ const Nav = () => {
   const { theme, setTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [menu, setMenu] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
@@ -69,29 +71,33 @@ const Nav = () => {
                 </Link>
               </li>
             </ul>
-            <button
-              onClick={toggleTheme}
-              className="relative w-14 h-8 flex items-center bg-gray-200 dark:bg-gray-700 rounded-full p-1 shadow-md"
-            >
-              <div className="absolute left-2 text-yellow-400">
-                <MdOutlineWbSunny
-                  className={`${
-                    theme === "dark" ? "opacity-100" : "opacity-0"
-                  } transition-opacity duration-200`}
+            {!mounted ? (
+              <div className="w-14 h-8 bg-gray-200 dark:bg-gray-700 rounded-full shadow-md animate-pulse" />
+            ) : (
+              <button
+                onClick={toggleTheme}
+                className="relative w-14 h-8 flex items-center bg-gray-200 dark:bg-gray-700 rounded-full p-1 shadow-md"
+              >
+                <div className="absolute left-2 text-yellow-400">
+                  <MdOutlineWbSunny
+                    className={`${
+                      theme === "dark" ? "opacity-100" : "opacity-0"
+                    } transition-opacity duration-200`}
+                  />
+                </div>
+                <motion.div
+                  animate={{ x: theme === "dark" ? 24 : 0 }}
+                  className="absolute w-6 h-6 bg-white dark:bg-gray-900 rounded-full shadow-md"
                 />
-              </div>
-              <motion.div
-                animate={{ x: theme === "dark" ? 24 : 0 }}
-                className="absolute w-6 h-6 bg-white dark:bg-gray-900 rounded-full shadow-md"
-              />
-              <div className="absolute right-2 text-gray-500 dark:text-gray-300">
-                <BsMoon
-                  className={`${
-                    theme === "dark" ? "opacity-0" : "opacity-100"
-                  } transition-opacity duration-200`}
-                />
-              </div>
-            </button>
+                <div className="absolute right-2 text-gray-500 dark:text-gray-300">
+                  <BsMoon
+                    className={`${
+                      theme === "dark" ? "opacity-0" : "opacity-100"
+                    } transition-opacity duration-200`}
+                  />
+                </div>
+              </button>
+            )}
           </nav>
         </motion.div>
       </motion.div>
@@ -113,29 +119,33 @@ const Nav = () => {
             <h1 className="text-text dark:text-white text-lg">AK</h1>
           </div>
           <div className="flex gap-4 items-center">
-            <button
-              onClick={toggleTheme}
-              className="relative w-14 h-8 flex items-center bg-gray-200 dark:bg-gray-700 rounded-full p-1 shadow-md"
-            >
-              <div className="absolute left-2 text-yellow-400">
-                <MdOutlineWbSunny
-                  className={`${
-                    theme === "dark" ? "opacity-100" : "opacity-0"
-                  } transition-opacity duration-200`}
+            {!mounted ? (
+              <div className="w-14 h-8 bg-gray-200 dark:bg-gray-700 rounded-full shadow-md animate-pulse" />
+            ) : (
+              <button
+                onClick={toggleTheme}
+                className="relative w-14 h-8 flex items-center bg-gray-200 dark:bg-gray-700 rounded-full p-1 shadow-md"
+              >
+                <div className="absolute left-2 text-yellow-400">
+                  <MdOutlineWbSunny
+                    className={`${
+                      theme === "dark" ? "opacity-100" : "opacity-0"
+                    } transition-opacity duration-200`}
+                  />
+                </div>
+                <motion.div
+                  animate={{ x: theme === "dark" ? 24 : 0 }}
+                  className="absolute w-6 h-6 bg-white dark:bg-gray-900 rounded-full shadow-md"
                 />
-              </div>
-              <motion.div
-                animate={{ x: theme === "dark" ? 24 : 0 }}
-                className="absolute w-6 h-6 bg-white dark:bg-gray-900 rounded-full shadow-md"
-              />
-              <div className="absolute right-2 text-gray-500 dark:text-gray-300">
-                <BsMoon
-                  className={`${
-                    theme === "dark" ? "opacity-0" : "opacity-100"
-                  } transition-opacity duration-200`}
-                />
-              </div>
-            </button>
+                <div className="absolute right-2 text-gray-500 dark:text-gray-300">
+                  <BsMoon
+                    className={`${
+                      theme === "dark" ? "opacity-0" : "opacity-100"
+                    } transition-opacity duration-200`}
+                  />
+                </div>
+              </button>
+            )}
 
             {/* Menu Button */}
             <button onClick={() => setMenu(!menu)}>

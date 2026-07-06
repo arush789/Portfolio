@@ -1,7 +1,9 @@
 "use client";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import bodzImage from "../../images/bodz.jpg";
 import movieconImage from "../../images/movie-con.jpg";
 import recitoreImage from "../../images/recitore.jpg";
@@ -15,7 +17,8 @@ const projects = [
     description: "An affiliate marketing website with exclusive deals.",
     image: bodzImage,
     demoLink: "https://best-online-dealz.vercel.app",
-    codeLink: "https://github.com/yourusername/best-online-dealz",
+    codeLink: "https://github.com/arush789/Best-Online-Dealz",
+    tags: ["React", "Javascript", "CSS", "Vite", "Affiliate"],
   },
   {
     id: 2,
@@ -23,7 +26,15 @@ const projects = [
     description: "Find and explore recipes with ease.",
     image: recitoreImage,
     demoLink: "https://recitore.vercel.app",
-    codeLink: "https://github.com/yourusername/recitore",
+    codeLink: "https://github.com/arush789/Recitore",
+    tags: [
+      "React",
+      "Javascript",
+      "MongoDB",
+      "Tailwindcss",
+      "Next.js",
+      "Recipe",
+    ],
   },
   {
     id: 3,
@@ -31,12 +42,19 @@ const projects = [
     description: "A movie discovery platform with advanced search.",
     image: movieconImage,
     demoLink: "https://movie-con.vercel.app",
-    codeLink: "https://github.com/yourusername/movie-con",
+    codeLink: "https://github.com/arush789/MovieCon",
+    tags: ["Javascript", "Vite", "Css", "TMDB API", "Movie Search"],
   },
 ];
 
 const MyProjects = () => {
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <div className="pt-16 pb-20 px-6">
       <AnimatedContent
@@ -50,41 +68,70 @@ const MyProjects = () => {
         threshold={0.15}
       >
         <h2 className="text-4xl font-bold text-center mb-12 text-text">
-          My Projects
+          Featured Projects
         </h2>
         <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-8 max-w-7xl mx-auto">
           {projects.map((project) => (
             <SpotlightCard
               key={project.id}
               spotlightColor={
-                theme === "dark"
-                  ? "rgba(255, 255, 255, 0.2)"
-                  : "rgba(0, 0, 0, 0.2)"
+                mounted && theme === "dark"
+                  ? "rgba(255, 255, 255, 0.08)"
+                  : "rgba(0, 0, 0, 0.04)"
               }
-              className="bg-background border-2"
+              className="bg-white dark:bg-black border border-gray-200 dark:border-neutral-800 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col h-full"
             >
-              <div className="relative overflow-hidden rounded-lg">
+              {/* Image Container with Hover zoom */}
+              <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-white dark:bg-neutral-950 border border-slate-200/50 dark:border-neutral-800/50">
                 <Image
-                  src={project.image}
                   alt={project.title}
-                  width={500}
-                  height={300}
-                  className="border-2 border-gray-300 rounded-xl"
+                  src={project.image}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
-              <div className="p-6 text-center">
-                <h3 className="text-2xl font-bold text-text">
+
+              {/* Card content */}
+              <div className="flex flex-col flex-grow pt-6">
+                <h3 className="text-xl font-bold text-slate-900 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
                   {project.title}
                 </h3>
-                <p className="mt-3">{project.description}</p>
-                <div className="mt-4 flex justify-center space-x-4">
+                <p className="mt-2 text-sm text-slate-600 dark:text-neutral-400 leading-relaxed flex-grow">
+                  {project.description}
+                </p>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-1.5 mt-4 mb-6">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs px-2.5 py-0.5 rounded-full bg-slate-200/60 text-slate-700 border border-slate-300/30 dark:bg-neutral-800 dark:text-neutral-300 dark:border-neutral-700/40 font-medium"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex gap-3 mt-auto w-full">
                   <Link
                     href={project.demoLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 text-white z-50 bg-button rounded-lg hover:bg-blue-600 transition-all duration-300"
+                    className="flex-1 flex items-center justify-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-xl bg-slate-900 hover:bg-slate-800 text-white dark:bg-white dark:hover:bg-slate-100 dark:text-neutral-950 shadow-sm transition-all duration-300 active:scale-95"
                   >
-                    Live Demo
+                    <span>Demo</span>
+                    <FaExternalLinkAlt className="text-[10px]" />
+                  </Link>
+                  <Link
+                    href={project.codeLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 flex items-center justify-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-xl border border-slate-300 dark:border-neutral-750 text-slate-800 dark:text-neutral-200 hover:bg-slate-100/80 dark:hover:bg-neutral-800 transition-all duration-300 active:scale-95"
+                  >
+                    <FaGithub className="text-sm" />
+                    <span>Code</span>
                   </Link>
                 </div>
               </div>

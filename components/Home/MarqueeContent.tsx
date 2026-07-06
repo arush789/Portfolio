@@ -25,8 +25,10 @@ const MarqueeContent = () => {
   const { resolvedTheme } = useTheme();
 
   const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleResize = () => setIsMobile(window.innerWidth < 640);
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -60,7 +62,7 @@ const MarqueeContent = () => {
         speed={50}
         gradient={!isMobile}
         gradientWidth={300}
-        gradientColor={resolvedTheme === "dark" ? "#0a0a0a" : "white"}
+        gradientColor={mounted && resolvedTheme === "dark" ? "#0a0a0a" : "white"}
         className="flex items-center border-t border-b border-gray-700 
           py-4"
       >

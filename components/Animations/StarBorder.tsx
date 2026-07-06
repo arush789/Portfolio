@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 
 type StarBorderProps<T extends React.ElementType> =
@@ -20,8 +20,13 @@ const StarBorder = <T extends React.ElementType = "button">({
 }: StarBorderProps<T>) => {
   const Component = as || "button";
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-  const color = theme === "dark" ? "#FFD700" : "#1E3A8A"; // Gold for dark theme, blue for light
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const color = mounted && theme === "dark" ? "#FFD700" : "#1E3A8A"; // Gold for dark theme, blue for light
 
   return (
     <Component
@@ -44,7 +49,7 @@ const StarBorder = <T extends React.ElementType = "button">({
       ></div>
       <div
         className={`relative z-1 border text-center text-[16px] py-[12px] px-[22px] rounded-[20px] ${
-          theme === "dark"
+          mounted && theme === "dark"
             ? "bg-gradient-to-b from-gray-900 to-black border-gray-700 text-white"
             : "bg-gradient-to-b from-white to-gray-200 border-gray-300 text-black"
         }`}

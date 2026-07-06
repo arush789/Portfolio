@@ -8,11 +8,17 @@ import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import MyProjects from "../components/Home/MyProjects";
 import profilePhoto from "../images/WhatsApp Image 2025-03-01 at 8.00.18 PM.jpeg";
 
 export default function Home() {
   const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const auroraColors = ["#1E3A8A", "#9333EA", "#6D28D9"];
 
@@ -29,7 +35,7 @@ export default function Home() {
           scale={1.05}
           threshold={0.15}
         >
-          {resolvedTheme === "dark" && (
+          {mounted && resolvedTheme === "dark" && (
             <Aurora
               colorStops={auroraColors}
               blend={1}
