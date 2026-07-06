@@ -104,7 +104,7 @@ const Projectpage = () => {
             My Creative Works
           </h1>
           <p className="mt-4 text-lg text-neutral-500 dark:text-neutral-400 max-w-2xl mx-auto">
-            A curated selection of projects I've built using modern web
+            A curated selection of projects I&apos;ve built using modern web
             technologies. Each project represents a step in my journey as a
             full-stack developer.
           </p>
