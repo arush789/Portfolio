@@ -6,6 +6,8 @@ import { useTheme } from "next-themes";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import AnimatedContent from "@/components/Animations/AnimatedContent";
 import SpotlightCard from "@/components/Animations/SpotlightCard";
+import ProjectSlider from "@/components/ProjectSlider";
+import EvolutionModal from "@/components/EvolutionModal";
 
 import bodzImage from "../../images/bodz.jpg";
 import calculatorImage from "../../images/Calculator.png";
@@ -13,10 +15,13 @@ import guessTheWordImage from "../../images/Guess The Word.png";
 import matchTheCardImage from "../../images/Matching Card.png";
 import movieconImage from "../../images/movie-con.jpg";
 import recitoreImage from "../../images/recitore.jpg";
+import recitoreV1Image from "../../images/recitore_v1.png";
+import recitoreV2Image from "../../images/recitore_v2.png";
 
 const Projectpage = () => {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [isEvolutionOpen, setIsEvolutionOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -35,17 +40,20 @@ const Projectpage = () => {
     {
       id: 2,
       title: "Recitore",
-      description: "Find and explore recipes with ease.",
+      description: "Explore recipes with ease. Modernized from classic V1 layout to full-featured modern V2 UI.",
       image: recitoreImage,
-      demoLink: "https://recitore.vercel.app",
+      v1Image: recitoreV1Image,
+      v2Image: recitoreV2Image,
+      isEvolution: true,
+      demoLink: "https://recitore-v2.vercel.app/",
       codeLink: "https://github.com/arush789/Recitore",
       tags: [
+        "Next.js",
         "React",
-        "Javascript",
         "MongoDB",
         "Tailwindcss",
-        "Next.js",
-        "Recipe",
+        "Framer Motion",
+        "Recipe UI",
       ],
     },
     {
@@ -121,21 +129,34 @@ const Projectpage = () => {
               }
               className="bg-white dark:bg-black border border-gray-200 dark:border-neutral-800 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col h-full"
             >
-              {/* Image Container with Hover zoom */}
-              <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-white dark:bg-neutral-950 border border-slate-200/50 dark:border-neutral-800/50">
-                <Image
+              {/* Image Container / Interactive Slider */}
+              {project.isEvolution && project.v1Image && project.v2Image ? (
+                <ProjectSlider
+                  v1Image={project.v1Image}
+                  v2Image={project.v2Image}
                   alt={project.title}
-                  src={project.image}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-              </div>
+              ) : (
+                <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-white dark:bg-neutral-950 border border-slate-200/50 dark:border-neutral-800/50">
+                  <Image
+                    alt={project.title}
+                    src={project.image}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+              )}
 
               {/* Card content */}
               <div className="flex flex-col flex-grow pt-6">
-                <h3 className="text-xl font-bold text-slate-900 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
-                  {project.title}
+                <h3 className="text-xl font-bold text-slate-900 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 flex items-center gap-2">
+                  <span>{project.title}</span>
+                  {project.isEvolution && (
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-500 font-semibold border border-blue-500/20">
+                      V1 → V2 Redesign
+                    </span>
+                  )}
                 </h3>
                 <p className="mt-2 text-sm text-slate-600 dark:text-neutral-400 leading-relaxed flex-grow">
                   {project.description}
@@ -152,6 +173,20 @@ const Projectpage = () => {
                     </span>
                   ))}
                 </div>
+
+                {/* Evolution Trigger (Pulsing Glow button) */}
+                {project.isEvolution && (
+                  <button
+                    onClick={() => setIsEvolutionOpen(true)}
+                    className="w-full mb-3 flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold rounded-xl border border-blue-500/30 hover:border-blue-500/50 bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 dark:text-blue-400 transition-all duration-300 cursor-pointer active:scale-95 shadow-xs"
+                  >
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                    </span>
+                    <span>View UI Evolution Flowchart</span>
+                  </button>
+                )}
 
                 {/* Action Buttons */}
                 <div className="flex gap-3 mt-auto w-full">
@@ -179,6 +214,14 @@ const Projectpage = () => {
           ))}
         </div>
       </AnimatedContent>
+
+      {/* Recitore Evolution Modal */}
+      <EvolutionModal
+        isOpen={isEvolutionOpen}
+        onClose={() => setIsEvolutionOpen(false)}
+        v1Image={recitoreV1Image}
+        v2Image={recitoreV2Image}
+      />
     </div>
   );
 };
