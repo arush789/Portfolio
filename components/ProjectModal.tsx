@@ -20,8 +20,6 @@ import ceres10 from "../images/ceres-10.jpeg";
 import ceres11 from "../images/ceres-11.jpeg";
 import ceres12 from "../images/ceres-12.jpeg";
 
-import recitoreV1Image from "../images/recitore_v1.png";
-import recitoreV2Image from "../images/recitore_v2.png";
 
 interface SpecItem {
   label: string;

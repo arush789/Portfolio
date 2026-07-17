@@ -57,7 +57,7 @@ const ContactPage = () => {
         setStatus("error");
         setErrorMessage(result.message || "Failed to send message.");
       }
-    } catch (error) {
+    } catch {
       setStatus("error");
       setErrorMessage("Something went wrong. Please check your network connection and try again.");
     }
