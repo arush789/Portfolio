@@ -10,8 +10,9 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Arush Kewalramani | Full-Stack Developer",
-  description: "Portfolio of Arush Kewalramani - Full-Stack Developer & Designer specialising in building modern web apps, mobile solutions, and IoT projects.",
+  title: "Arush Kewalramani",
+  description:
+    "Portfolio of Arush Kewalramani - Full-Stack Developer & Designer specialising in building modern web apps, mobile solutions, and IoT projects.",
 };
 
 export default function RootLayout({
