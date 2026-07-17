@@ -1,39 +1,25 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --color-text: var(--color-text);
-  --color-background: var(--geist-background);
-  --color-primary: var(--color-primary);
-  --color-secondary: var(--color-secondary);
-  --color-accent: var(--color-accent);
-  --color-muted: var(--color-muted);
-  --color-border: var(--color-border);
-  --color-button: var(--color-button);
-  --color-input: var(--color-input);
-  --color-form: var(--color-form);
-  --color-tag: var(--color-tag);
-  --color-source-button: var(--color-source-button);
-  --color-description: var(--color-description);
-  --color-hover-button: var(--color-hover-button);
-}
-
-:root {
+  
   --color-background: #ffffff;
   --color-text: #171717;
-  --color-button: #222324; /* Updated button color */
-  --color-hover-button: #1a1b1c; /* Darker hover effect */
+  --color-button: #222324;
+  --color-hover-button: #1a1b1c;
   --color-primary: #1e40af;
   --color-secondary: #9333ea;
   --color-accent: #f59e0b;
   --color-muted: #6b7280;
   --color-border: #d1d5db;
-  --color-input: #f3f4f6; /* Light gray input background */
-  --color-form: #ffffff; /* Form background */
-  --color-tag: #f5f5f5; /* Blue for tag */
-  --color-source-button: #10b981; /* Green for source button */
-  --color-description: #4b5563; /* Dark gray for descriptions */
+  --color-input: #f3f4f6;
+  --color-form: #ffffff;
+  --color-tag: #f5f5f5;
+  --color-source-button: #10b981;
+  --color-description: #4b5563;
 }
 
 .dark {
