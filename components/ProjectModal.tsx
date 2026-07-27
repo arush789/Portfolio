@@ -20,6 +20,16 @@ import ceres10 from "../images/ceres-10.jpeg";
 import ceres11 from "../images/ceres-11.jpeg";
 import ceres12 from "../images/ceres-12.jpeg";
 
+// CoinTrack screenshots
+import cointrack1 from "../images/Budget App/cointrack-1.jpeg";
+import cointrack2 from "../images/Budget App/cointrack-2.jpeg";
+import cointrack3 from "../images/Budget App/cointrack-3.jpeg";
+import cointrack4 from "../images/Budget App/cointrack-4.jpeg";
+import cointrack7 from "../images/Budget App/cointrack-7.jpeg";
+import cointrack8 from "../images/Budget App/cointrack-8.jpeg";
+import cointrack9 from "../images/Budget App/cointrack-9.jpeg";
+import cointrack10 from "../images/Budget App/cointrack-10.jpeg";
+import cointrack11 from "../images/Budget App/cointrack-11.jpeg";
 
 interface SpecItem {
   label: string;
@@ -36,6 +46,7 @@ interface Project {
   codeLink: string;
   tags: string[];
   isCeres?: boolean;
+  isCoinTrack?: boolean;
   isEvolution?: boolean;
   v1Image?: StaticImageData | string;
   v2Image?: StaticImageData | string;
@@ -63,6 +74,18 @@ const ceresScreenshots = [
   { img: ceres10, title: "Cloud Integration" },
   { img: ceres11, title: "Settings & Profile" },
   { img: ceres12, title: "Onboarding Flow" },
+];
+
+const cointrackScreenshots = [
+  { img: cointrack8, title: "Goal Met Celebration" },
+  { img: cointrack1, title: "Home Dashboard" },
+  { img: cointrack7, title: "PDF Statement Export" },
+  { img: cointrack9, title: "Income & Budget Setup" },
+  { img: cointrack2, title: "Transaction History" },
+  { img: cointrack3, title: "Add Transaction Dialog" },
+  { img: cointrack10, title: "Secure Account Sign-In" },
+  { img: cointrack4, title: "Savings Goals Progress" },
+  { img: cointrack11, title: "User Settings & Profile" },
 ];
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project }) => {
@@ -99,14 +122,6 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
   }, [isOpen]);
 
   if (!isOpen || !project) return null;
-
-  const nextCeresScreen = () => {
-    setActiveCeresIndex((prev) => (prev + 1) % ceresScreenshots.length);
-  };
-
-  const prevCeresScreen = () => {
-    setActiveCeresIndex((prev) => (prev - 1 + ceresScreenshots.length) % ceresScreenshots.length);
-  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 overflow-y-auto">
@@ -145,12 +160,17 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
                   IoT & ML Mobile
                 </span>
               )}
+              {project.isCoinTrack && (
+                <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-violet-500/10 text-violet-500 font-semibold border border-violet-500/20 animate-pulse">
+                  Personal Finance & AI Mobile (In Progress)
+                </span>
+              )}
               {project.isEvolution && (
                 <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-500 font-semibold border border-blue-500/20">
                   V1 → V2 Redesign
                 </span>
               )}
-              {!project.isCeres && !project.isEvolution && (
+              {!project.isCeres && !project.isCoinTrack && !project.isEvolution && (
                 <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-purple-500/10 text-purple-500 font-semibold border border-purple-500/20">
                   Web Application
                 </span>
@@ -176,8 +196,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
             
             {/* Left side visual element */}
             <div className="flex-grow flex items-center justify-center bg-slate-50 dark:bg-neutral-950/40 rounded-2xl p-6 border border-slate-200/50 dark:border-neutral-800/50 w-full lg:max-w-2xl min-h-[300px]">
-              {project.isCeres ? (
-                /* Portrait Phone Bezel Mockup for Ceres AI */
+              {project.isCeres || project.isCoinTrack ? (
+                /* Portrait Phone Bezel Mockup for Ceres AI / CoinTrack */
                 <div className="flex flex-col items-center gap-4 w-full">
                   <div className="relative w-[230px] aspect-[9/19.5] border-[6px] border-neutral-800 dark:border-neutral-950 rounded-[36px] shadow-2xl bg-black overflow-hidden group select-none">
                     {/* Speaker Notch */}
@@ -188,12 +208,22 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
 
                     {/* Screenshot Frame Container */}
                     <div 
-                      onClick={() => setLightboxImage(ceresScreenshots[activeCeresIndex].img)}
+                      onClick={() => setLightboxImage(
+                        project.isCeres 
+                          ? ceresScreenshots[Math.min(activeCeresIndex, ceresScreenshots.length - 1)].img 
+                          : cointrackScreenshots[Math.min(activeCeresIndex, cointrackScreenshots.length - 1)].img
+                      )}
                       className="relative w-full h-full cursor-zoom-in"
                     >
                       <Image
-                        src={ceresScreenshots[activeCeresIndex].img}
-                        alt={ceresScreenshots[activeCeresIndex].title}
+                        src={project.isCeres 
+                          ? ceresScreenshots[Math.min(activeCeresIndex, ceresScreenshots.length - 1)].img 
+                          : cointrackScreenshots[Math.min(activeCeresIndex, cointrackScreenshots.length - 1)].img
+                        }
+                        alt={project.isCeres 
+                          ? ceresScreenshots[Math.min(activeCeresIndex, ceresScreenshots.length - 1)].title 
+                          : cointrackScreenshots[Math.min(activeCeresIndex, cointrackScreenshots.length - 1)].title
+                        }
                         fill
                         className="object-cover"
                         priority
@@ -202,13 +232,19 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
 
                     {/* Controls inside Phone Screen */}
                     <button 
-                      onClick={prevCeresScreen}
+                      onClick={() => {
+                        const len = project.isCeres ? ceresScreenshots.length : cointrackScreenshots.length;
+                        setActiveCeresIndex((prev) => (prev - 1 + len) % len);
+                      }}
                       className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center z-15 backdrop-blur-xs transition-colors"
                     >
                       <FaChevronLeft className="text-xs" />
                     </button>
                     <button 
-                      onClick={nextCeresScreen}
+                      onClick={() => {
+                        const len = project.isCeres ? ceresScreenshots.length : cointrackScreenshots.length;
+                        setActiveCeresIndex((prev) => (prev + 1) % len);
+                      }}
                       className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center z-15 backdrop-blur-xs transition-colors"
                     >
                       <FaChevronRight className="text-xs" />
@@ -217,13 +253,15 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
 
                   {/* Thumbnail Strip */}
                   <div className="flex gap-1.5 overflow-x-auto w-full max-w-md pb-2 px-1 justify-start md:justify-center">
-                    {ceresScreenshots.map((shot, idx) => (
+                    {(project.isCeres ? ceresScreenshots : cointrackScreenshots).map((shot, idx) => (
                       <button
                         key={idx}
                         onClick={() => setActiveCeresIndex(idx)}
                         className={`flex-none w-10 h-16 rounded border overflow-hidden transition-all ${
                           idx === activeCeresIndex 
-                            ? "border-emerald-500 scale-105 shadow-md" 
+                            ? project.isCeres 
+                              ? "border-emerald-500 scale-105 shadow-md" 
+                              : "border-violet-500 scale-105 shadow-md"
                             : "border-slate-200 dark:border-neutral-800 opacity-60 hover:opacity-100"
                         }`}
                       >
@@ -285,10 +323,16 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
             {/* Right side info specs & tags */}
             <div className="w-full lg:w-1/3 flex flex-col justify-between space-y-6">
               <div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-neutral-100 mb-3 border-l-4 border-blue-500 pl-3">
+                <h3 className={`text-lg font-bold text-slate-900 dark:text-neutral-100 mb-3 border-l-4 pl-3 ${
+                  project.isCeres 
+                    ? "border-emerald-500" 
+                    : project.isCoinTrack 
+                    ? "border-violet-500" 
+                    : "border-blue-500"
+                }`}>
                   Project Description
                 </h3>
-                <p className="text-sm text-slate-600 dark:text-neutral-400 leading-relaxed">
+                <p className="text-base text-slate-700 dark:text-neutral-300 font-medium leading-relaxed">
                   {project.description}
                 </p>
               </div>
@@ -376,6 +420,50 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
             </div>
           )}
 
+          {project.isCoinTrack && (
+            <div>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-neutral-100 mb-6 border-l-4 border-violet-500 pl-3">
+                CoinTrack System Architecture
+              </h3>
+              <div className="grid md:grid-cols-7 items-center gap-6 md:gap-4 max-w-5xl mx-auto text-center md:text-left">
+                {/* Onboarding */}
+                <div className="md:col-span-2 bg-slate-50 dark:bg-neutral-950/40 border border-slate-200 dark:border-neutral-800/80 rounded-2xl p-5 hover:border-slate-300 dark:hover:border-neutral-800 transition-all">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-violet-500">Authentication & Entry</span>
+                  <h4 className="text-md font-bold text-slate-800 dark:text-neutral-200 mb-2 mt-1">Secure User Session</h4>
+                  <p className="text-sm text-slate-700 dark:text-neutral-300 font-medium leading-relaxed">
+                    Uses Supabase GoTrue Auth with local caching for instant session recovery, routing users to onboarding or home dashboard.
+                  </p>
+                </div>
+                {/* Arrow */}
+                <div className="md:col-span-1 flex flex-col items-center justify-center py-2">
+                  <FaChevronRight className="hidden md:block text-violet-500 text-sm" />
+                  <FaChevronDown className="block md:hidden text-violet-500 text-sm" />
+                </div>
+                {/* Real-time sync */}
+                <div className="md:col-span-2 bg-violet-500/5 dark:bg-violet-500/[0.02] border border-violet-500/30 rounded-2xl p-5 hover:border-violet-500/50 transition-all">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-violet-500">Business Logic Layer</span>
+                  <h4 className="text-md font-bold text-slate-800 dark:text-neutral-100 mb-2 mt-1">Smart Guard Sentinels</h4>
+                  <p className="text-sm text-slate-700 dark:text-neutral-300 font-medium leading-relaxed">
+                    Local checks block overdraft transactions and alert users when remaining funds fall below the 10% income threshold.
+                  </p>
+                </div>
+                {/* Arrow */}
+                <div className="md:col-span-1 flex flex-col items-center justify-center py-2">
+                  <FaChevronRight className="hidden md:block text-blue-500 text-sm" />
+                  <FaChevronDown className="block md:hidden text-blue-500 text-sm" />
+                </div>
+                {/* Cloud & Exports */}
+                <div className="md:col-span-1 bg-slate-50 dark:bg-neutral-950/40 border border-slate-200 dark:border-neutral-800/80 rounded-2xl p-4 hover:border-slate-300 dark:hover:border-neutral-800 transition-all text-center">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-blue-500">Data Storage</span>
+                  <h4 className="text-sm font-bold text-slate-800 dark:text-neutral-200 mb-1 mt-1">Supabase DB & PDF Export</h4>
+                  <p className="text-xs text-slate-700 dark:text-neutral-300 font-medium leading-relaxed">
+                    PostgreSQL storage with offline-first print queues and sharing utilities.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
           {project.isEvolution && (
             <div>
               <h3 className="text-lg font-bold text-slate-900 dark:text-neutral-100 mb-6 border-l-4 border-blue-500 pl-3">
@@ -415,7 +503,13 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
 
           {/* Section 3: Detailed Technical Specs & Feature Cards */}
           <div>
-            <h3 className="text-lg font-bold text-slate-900 dark:text-neutral-100 mb-6 border-l-4 border-blue-500 pl-3">
+            <h3 className={`text-lg font-bold text-slate-900 dark:text-neutral-100 mb-6 border-l-4 pl-3 ${
+              project.isCeres 
+                ? "border-emerald-500" 
+                : project.isCoinTrack 
+                ? "border-violet-500" 
+                : "border-blue-500"
+            }`}>
               Features & Architecture Spec
             </h3>
             <div className="grid md:grid-cols-2 gap-8">
@@ -433,10 +527,16 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
                     "Seamless deployment configurations with high-performance metrics."
                   ]).map((feature, idx) => (
                     <div key={idx} className="flex gap-3 items-start">
-                      <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-blue-500 dark:bg-blue-500/20">
+                      <div className={`mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
+                        project.isCeres
+                          ? "bg-emerald-500/10 text-emerald-500 dark:bg-emerald-500/20"
+                          : project.isCoinTrack
+                          ? "bg-violet-500/10 text-violet-500 dark:bg-violet-500/20"
+                          : "bg-blue-500/10 text-blue-500 dark:bg-blue-500/20"
+                      }`}>
                         <FaCheck className="text-[10px]" />
                       </div>
-                      <p className="text-xs text-slate-600 dark:text-neutral-400 leading-relaxed">
+                      <p className="text-sm md:text-base text-slate-700 dark:text-neutral-200 font-medium leading-relaxed">
                         {feature}
                       </p>
                     </div>
@@ -450,14 +550,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
                   Technical Stack Breakdown
                 </h4>
                 <div className="overflow-hidden border border-slate-200 dark:border-neutral-800 rounded-2xl">
-                  <table className="w-full text-xs text-left border-collapse">
+                  <table className="w-full text-xs md:text-sm text-left border-collapse">
                     <thead>
                       <tr className="bg-slate-50 dark:bg-neutral-950/40 border-b border-slate-200 dark:border-neutral-800">
                         <th className="p-3 font-bold text-slate-500 uppercase tracking-wider">Architecture Layer</th>
                         <th className="p-3 font-bold text-slate-500 uppercase tracking-wider">Technologies Used</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-200 dark:divide-neutral-800">
+                    <tbody className="divide-y divide-slate-200 dark:divide-neutral-850">
                       {(project.specs || [
                         { label: "Frontend Core", value: "HTML5, Vanilla CSS, JS (ES6+)" },
                         { label: "Execution Layer", value: "Vite, ESBuild compilers" },
@@ -465,8 +565,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
                         { label: "Code Repository", value: "GitHub Git Sync" }
                       ]).map((spec, idx) => (
                         <tr key={idx}>
-                          <td className="p-3 font-semibold text-slate-900 dark:text-neutral-200">{spec.label}</td>
-                          <td className="p-3 text-slate-600 dark:text-neutral-400">{spec.value}</td>
+                          <td className="p-3 font-bold text-slate-800 dark:text-neutral-250 w-1/3">{spec.label}</td>
+                          <td className="p-3 text-slate-750 dark:text-neutral-300 font-semibold">{spec.value}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -487,13 +587,13 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
                 href={project.codeLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg border border-slate-300 dark:border-neutral-700 text-slate-700 dark:text-neutral-300 hover:bg-slate-100 dark:hover:bg-neutral-800 transition-colors"
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg border border-slate-300 dark:border-neutral-700 text-slate-700 dark:text-neutral-350 hover:bg-slate-100 dark:hover:bg-neutral-800 transition-colors"
               >
                 <FaGithub />
                 <span>Repository</span>
               </a>
             )}
-            {!project.isCeres && project.demoLink && (
+            {!project.isCeres && !project.isCoinTrack && project.demoLink && (
               <a
                 href={project.demoLink}
                 target="_blank"

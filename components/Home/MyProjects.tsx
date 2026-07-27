@@ -8,12 +8,12 @@ import AnimatedContent from "../Animations/AnimatedContent";
 import SpotlightCard from "../Animations/SpotlightCard";
 import ProjectSlider from "../ProjectSlider";
 
-import bodzImage from "../../images/bodz.jpg";
 import movieconImage from "../../images/movie-con.jpg";
 import recitoreImage from "../../images/recitore.jpg";
 import recitoreV1Image from "../../images/recitore_v1.png";
 import recitoreV2Image from "../../images/recitore_v2.png";
 import ceresLogo from "../../images/ceres-logo.png";
+import cointrackLogo from "../../images/cointrack_logo.png";
 import ProjectModal from "../ProjectModal";
 
 const projects = [
@@ -51,26 +51,37 @@ const projects = [
   },
   {
     id: 2,
-    title: "Best Online Dealz",
-    year: "2023",
-    description: "An affiliate marketing website with exclusive deals.",
-    image: bodzImage,
-    demoLink: "https://best-online-dealz.vercel.app",
-    codeLink: "https://github.com/arush789/Best-Online-Dealz",
-    tags: ["React", "Javascript", "CSS", "Vite", "Affiliate"],
+    title: "CoinTrack",
+    year: "2026",
+    description: "A next-gen personal finance tracker incorporating AI receipt scanning, smart budgeting forecasting, secure auth, real-time balances, overdraft blockers, and PDF reports.",
+    image: cointrackLogo,
+    isCoinTrack: true,
+    demoLink: "#",
+    codeLink: "https://github.com/arush789/budgeting-app",
+    tags: [
+      "React Native",
+      "Expo",
+      "AI Integration",
+      "NativeWind",
+      "Supabase",
+      "Context API",
+      "PDF Export",
+    ],
     features: [
-      "Affiliate Deals Engine: Dynamic listing of current deals, coupon codes, and promotional discounts.",
-      "Advanced Filters: Instantly search, filter, and sort deal cards by category or stores.",
-      "Responsive Card Layout: Elegant glassmorphic cards optimized for mobile and desktop screens.",
-      "Performance Optimized: Extremely lightweight React/Vite layout for fast loading speeds."
+      "AI-Driven Smart Budgeting: Real-time transaction history profiling to forecast liquid savings and suggest smart budget categories.",
+      "AI OCR Receipt Scanning (In Progress): Automated receipt processing to capture names, amounts, categories, and payment modes instantly.",
+      "AI Financial Coach (In Progress): Context-aware LLM advisor integration to generate personalized financial health reports and savings advice.",
+      "Smart Safety Nets: Built-in Overdraft Blocker and a 10% Low-Savings Sentinel to actively guard financial health.",
+      "Goal Milestones & Refunds: Set visual savings goals with progress rings; deleting a goal safely refunds contributed money back to your balance.",
+      "PDF Statement Share: Compile and export full monthly expense statements into sharing sheets."
     ],
     specs: [
-      { label: "Framework & Core", value: "React, Vite, CSS Modules" },
-      { label: "Language", value: "JavaScript (ES6+)" },
-      { label: "Styling", value: "Custom Vanilla CSS" },
-      { label: "Deployment", value: "Vercel Web Server" }
-    ],
-    browserUrl: "https://best-online-dealz.vercel.app"
+      { label: "Frontend Mobile", value: "React Native, Expo, NativeWind (Tailwind), Vector Icons" },
+      { label: "State Management", value: "Context API, custom Auth Context hooks" },
+      { label: "Backend Database", value: "Supabase (PostgreSQL), GoTrue Auth, Realtime Sync" },
+      { label: "File Export Services", value: "Expo Print (HTML to PDF), Expo Sharing API" },
+      { label: "AI Integration (Future)", value: "Automated receipt parsing, LLM financial coach (In Progress)" }
+    ]
   },
   {
     id: 3,
@@ -166,17 +177,23 @@ const MyProjects = () => {
               className={`bg-white/80 dark:bg-neutral-900/40 backdrop-blur-md border border-slate-200/60 dark:border-neutral-800/80 rounded-[36px] overflow-hidden shadow-xs hover:shadow-2xl transition-all duration-500 hover:-translate-y-1.5 group flex flex-col h-full p-6 ${
                 project.isCeres
                   ? "hover:border-emerald-500/30 hover:shadow-emerald-500/8"
+                  : project.isCoinTrack
+                  ? "hover:border-violet-500/30 hover:shadow-violet-500/8"
                   : project.isEvolution
                   ? "hover:border-blue-500/30 hover:shadow-blue-500/8"
                   : "hover:border-purple-500/30 hover:shadow-purple-500/8"
               }`}
             >
               {/* Image Container / Interactive Slider */}
-              {project.isCeres ? (
+              {project.isCeres || project.isCoinTrack ? (
                 /* Beautiful padded logo wrapper with soft background & shadows */
                 <div className="relative aspect-video w-full overflow-hidden rounded-[24px] bg-slate-100/50 dark:bg-neutral-950/60 flex items-center justify-center border border-slate-200/35 dark:border-neutral-900/50 p-6 select-none shadow-inner">
                   {/* Soft ambient glow behind logo */}
-                  <div className="absolute w-32 h-32 rounded-full bg-emerald-500/10 dark:bg-emerald-500/5 blur-2xl pointer-events-none" />
+                  <div className={`absolute w-32 h-32 rounded-full blur-2xl pointer-events-none ${
+                    project.isCeres 
+                      ? "bg-emerald-500/10 dark:bg-emerald-500/5" 
+                      : "bg-violet-500/10 dark:bg-violet-500/5"
+                  }`} />
                   <div className="relative w-24 h-24 rounded-3xl overflow-hidden shadow-lg border border-slate-200/40 dark:border-neutral-800/60 transition-transform duration-500 group-hover:scale-105">
                     <Image
                       alt={project.title}
@@ -234,6 +251,8 @@ const MyProjects = () => {
                       className={`text-xs px-3 py-1 rounded-full border transition-colors font-semibold ${
                         project.isCeres
                           ? "bg-emerald-50 text-emerald-700 border-emerald-200/60 dark:bg-emerald-950/30 dark:text-emerald-400 dark:border-emerald-800/50"
+                          : project.isCoinTrack
+                          ? "bg-violet-50 text-violet-700 border-violet-200/60 dark:bg-violet-950/30 dark:text-violet-400 dark:border-violet-800/50"
                           : project.isEvolution
                           ? "bg-blue-50 text-blue-700 border-blue-200/60 dark:bg-blue-950/30 dark:text-blue-400 dark:border-blue-800/50"
                           : "bg-purple-50 text-purple-700 border-purple-200/60 dark:bg-purple-950/30 dark:text-purple-400 dark:border-purple-800/50"
@@ -253,6 +272,8 @@ const MyProjects = () => {
                   className={`w-full mb-3.5 flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold rounded-xl border transition-all duration-300 cursor-pointer active:scale-95 shadow-xs ${
                     project.isCeres
                       ? "border-emerald-500/30 hover:border-emerald-500/50 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400"
+                      : project.isCoinTrack
+                      ? "border-violet-500/30 hover:border-violet-500/50 bg-violet-500/10 hover:bg-violet-500/20 text-violet-600 dark:text-violet-400"
                       : project.isEvolution
                       ? "border-blue-500/30 hover:border-blue-500/50 bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 dark:text-blue-400"
                       : "border-purple-500/30 hover:border-purple-500/50 bg-purple-500/10 hover:bg-purple-500/20 text-purple-600 dark:text-purple-400"
@@ -260,18 +281,18 @@ const MyProjects = () => {
                 >
                   <span className="relative flex h-2 w-2">
                     <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
-                      project.isCeres ? "bg-emerald-400" : project.isEvolution ? "bg-blue-400" : "bg-purple-400"
+                      project.isCeres ? "bg-emerald-400" : project.isCoinTrack ? "bg-violet-400" : project.isEvolution ? "bg-blue-400" : "bg-purple-400"
                     }`}></span>
                     <span className={`relative inline-flex rounded-full h-2 w-2 ${
-                      project.isCeres ? "bg-emerald-500" : project.isEvolution ? "bg-blue-500" : "bg-purple-500"
+                      project.isCeres ? "bg-emerald-500" : project.isCoinTrack ? "bg-violet-500" : project.isEvolution ? "bg-blue-500" : "bg-purple-500"
                     }`}></span>
                   </span>
-                  <span>{project.isCeres ? "View App Details & Screenshots" : project.isEvolution ? "View UI Evolution Flowchart" : "View Project Details"}</span>
+                  <span>{project.isCeres || project.isCoinTrack ? "View App Details & Screenshots" : project.isEvolution ? "View UI Evolution Flowchart" : "View Project Details"}</span>
                 </button>
 
                 {/* Action Buttons */}
                 <div className="flex gap-3.5 mt-auto w-full">
-                  {!project.isCeres && project.demoLink && project.demoLink !== "#" ? (
+                  {!project.isCeres && !project.isCoinTrack && project.demoLink && project.demoLink !== "#" ? (
                     <Link
                       href={project.demoLink}
                       target="_blank"
@@ -293,7 +314,15 @@ const MyProjects = () => {
                         setSelectedProject(project);
                         setIsModalOpen(true);
                       }}
-                      className="flex-1 flex items-center justify-center gap-2 px-5 py-2.5 text-xs font-bold rounded-xl text-white cursor-pointer shadow-sm transition-all duration-300 active:scale-95 hover:shadow-md bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400"
+                      className={`flex-1 flex items-center justify-center gap-2 px-5 py-2.5 text-xs font-bold rounded-xl text-white cursor-pointer shadow-sm transition-all duration-300 active:scale-95 hover:shadow-md ${
+                        project.isCeres
+                          ? "bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400"
+                          : project.isCoinTrack
+                          ? "bg-gradient-to-r from-violet-600 to-indigo-500 hover:from-violet-500 hover:to-indigo-400"
+                          : project.isEvolution
+                          ? "bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400"
+                          : "bg-gradient-to-r from-purple-600 to-indigo-500 hover:from-purple-500 hover:to-indigo-400"
+                      }`}
                     >
                       <span>Showcase</span>
                       <FaExternalLinkAlt className="text-[10px]" />
